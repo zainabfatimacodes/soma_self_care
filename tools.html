@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tools — Soma</title>
+<meta name="description" content="A skin type quiz, a weekly habit tracker, and BMI and calorie calculators. Everything saves privately in your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Hanken+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<script>try{var t=JSON.parse(localStorage.getItem('soma-theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}</script>
+<style>
+.th{margin:-76px 12px 0;border-radius:34px;background:var(--accent);color:var(--on-accent);position:relative;overflow:hidden;min-height:min(78vh,700px);display:flex;align-items:flex-end}
+.th::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,color-mix(in srgb,var(--on-accent) 40%,transparent) 1.6px,transparent 2px);background-size:34px 34px;mask-image:linear-gradient(135deg,transparent 30%,#000 90%);-webkit-mask-image:linear-gradient(135deg,transparent 30%,#000 90%)}
+.th .wrap{position:relative;padding:150px 0 50px;display:grid;gap:30px}
+.th h1 em{color:inherit;opacity:.72}.th .eyebrow{color:inherit;opacity:.85}.th .lead{color:inherit;opacity:.88}
+.th .chip{border-color:color-mix(in srgb,var(--on-accent) 45%,transparent);color:inherit}.th .chip:hover{background:var(--on-accent);color:var(--accent)}
+.quiz{display:grid;grid-template-columns:.8fr 1.2fr;gap:18px}
+@media(max-width:900px){.quiz{grid-template-columns:1fr}}
+.qside{display:flex;flex-direction:column;justify-content:space-between;gap:30px;padding:clamp(26px,4vw,44px);border-radius:var(--r);background:var(--ink);color:var(--bg);min-height:420px}
+.qside h2{color:inherit}.qside h2 em{color:var(--accent)}
+.qbar{height:5px;border-radius:9px;background:color-mix(in srgb,var(--bg) 20%,transparent);overflow:hidden}
+.qbar i{display:block;height:100%;width:0;background:var(--accent);transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.qbox{padding:clamp(26px,4vw,50px);min-height:420px;display:flex;flex-direction:column;justify-content:center}
+.qbox h3{font-size:clamp(1.6rem,3vw,2.4rem);margin:14px 0 28px;line-height:1.1}
+.opts{display:grid;gap:10px}
+.opt{text-align:left;padding:17px 22px;border-radius:16px;border:1px solid var(--line);background:var(--bg);font-size:1rem;transition:.3s;display:flex;gap:14px;align-items:center}
+.opt::before{content:"";flex:none;width:18px;height:18px;border-radius:50%;border:2px solid var(--line);transition:.3s}
+.opt:hover{border-color:var(--accent);transform:translateX(6px)}.opt:hover::before{border-color:var(--accent);background:var(--accent)}
+.res h3{font-size:clamp(2.6rem,6vw,4.6rem);margin:12px 0 14px}.res h3 em{display:inline}
+.bars{display:grid;gap:12px;margin:26px 0}
+.bars div{display:grid;grid-template-columns:100px 1fr 30px;gap:14px;align-items:center;font-family:var(--ff-m);font-size:.78rem}
+.bars i{height:10px;border-radius:9px;background:var(--line);position:relative;overflow:hidden}
+.bars i::after{content:"";position:absolute;inset:0;width:var(--w);background:var(--accent);border-radius:9px;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.hab{overflow-x:auto}
+.hab table{width:100%;border-collapse:collapse;min-width:640px}
+.hab th{font-family:var(--ff-m);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:400;padding:10px 8px;text-align:center}
+.hab th:first-child,.hab td:first-child{text-align:left;padding-left:4px}
+.hab th.today{color:var(--accent)}
+.hab td{padding:13px 8px;border-top:1px solid var(--line);text-align:center}
+.hab td:first-child{font-family:var(--ff-d);font-size:1.2rem;letter-spacing:-.01em}
+.hab td:last-child{font-family:var(--ff-m);font-size:.82rem;color:var(--accent);text-align:right;padding-right:4px;white-space:nowrap}
+.hab input[type=checkbox]{appearance:none;-webkit-appearance:none;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--line);cursor:pointer;transition:.25s;display:inline-grid;place-items:center;background:transparent}
+.hab input:hover{border-color:var(--accent)}
+.hab input:checked{background:var(--accent);border-color:var(--accent)}
+.hab input:checked::after{content:"";width:8px;height:14px;border:solid var(--on-accent);border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.del{opacity:.4;font-size:1.1rem;padding:0 8px}.del:hover{opacity:1;color:var(--accent)}
+.addh{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}.addh input{flex:1;min-width:200px}
+.sumrow{display:flex;gap:30px;flex-wrap:wrap;align-items:center;margin-bottom:24px}
+.sumrow b{font-family:var(--ff-d);font-weight:300;font-size:3.4rem;letter-spacing:-.04em;line-height:1}
+.sumrow span{font-family:var(--ff-m);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:block}
+.calc2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:860px){.calc2{grid-template-columns:1fr}}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.out{background:var(--accent);color:var(--on-accent);border-radius:var(--r);padding:clamp(26px,4vw,44px);display:grid;gap:14px;align-content:center}
+.out .n{font-family:var(--ff-d);font-weight:250;font-size:clamp(4.4rem,10vw,7.4rem);letter-spacing:-.05em;line-height:.85}
+.out small{font-family:var(--ff-m);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;opacity:.8}
+.out p{opacity:.92;font-size:.96rem}
+.scale{height:12px;border-radius:9px;background:linear-gradient(90deg,#6FA8DC 0 18.5%,#7DC98F 18.5% 46%,#E9C46A 46% 60%,#E76F51 60%);position:relative;margin:10px 0 4px}
+.scale i{position:absolute;top:-6px;width:4px;height:24px;border-radius:2px;background:#fff;box-shadow:0 0 0 2px rgba(0,0,0,.25);left:var(--x);transition:left .8s cubic-bezier(.2,.8,.2,1)}
+.meals{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px}
+.meals div{background:color-mix(in srgb,var(--on-accent) 14%,transparent);border-radius:14px;padding:14px;text-align:center}
+.meals b{display:block;font-family:var(--ff-d);font-weight:350;font-size:1.7rem}
+</style>
+</head>
+<body class="p-tools" data-page="tools">
+<div id="site-header"></div>
+
+<header class="th grain">
+  <div class="wrap">
+    <span class="eyebrow rv">Chapter 05 — Tools</span>
+    <h1 class="rv" style="--d:.06s">Tools,<br><em>not rules.</em></h1>
+    <p class="lead rv" style="--d:.14s">Four small helpers for building a routine that fits you. Everything stays on your device — nothing is sent anywhere.</p>
+    <div class="chips rv" style="--d:.2s"><a class="chip" href="#quiz">Skin quiz</a><a class="chip" href="#tracker">Habit tracker</a><a class="chip" href="#calc">Calculators</a></div>
+  </div>
+</header>
+
+<section id="quiz">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">Tool 01</span><h2>What’s your <em>skin type?</em></h2></div>
+    <div class="quiz rv">
+      <div class="qside"><div><h2>Five questions,<br><em>two minutes.</em></h2></div><div><div class="mono" id="qcount" style="font-size:.8rem;margin-bottom:12px;opacity:.8">Question 1 of 5</div><div class="qbar"><i id="qbar"></i></div></div></div>
+      <div class="card qbox" id="qbox"></div>
+    </div>
+  </div>
+</section>
+
+<section id="tracker" style="background:var(--surface2);border-radius:40px;margin-inline:12px">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">Tool 02</span><h2>This week’s <em>habits.</em></h2><p class="lead">Tick each habit as you do it. The week resets every Monday; your habit list stays.</p></div>
+    <div class="card rv">
+      <div class="sumrow"><div><b id="tdone">0</b><span>Ticks this week</span></div><div><b id="tpct">0%</b><span>Completion</span></div><div><b id="tbest">—</b><span>Best habit</span></div></div>
+      <div class="hab"><table><thead><tr id="thead"></tr></thead><tbody id="tbody"></tbody></table></div>
+      <form class="addh" id="addh"><input type="text" id="newh" placeholder="Add a habit (e.g. Stretch for 5 minutes)" maxlength="40" aria-label="New habit"><button class="btn btn-p" type="submit">Add</button><button class="btn btn-g" type="button" id="rst">Clear this week</button></form>
+    </div>
+  </div>
+</section>
+
+<section id="calc">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">Tool 03</span><h2>Know your <em>numbers.</em></h2><p class="lead">Estimates only. They’re useful starting points, not verdicts.</p></div>
+    <div data-tabs class="rv">
+      <div class="tabs-nav"><button class="chip" data-tab="bmi">BMI</button><button class="chip" data-tab="cal">Daily calories</button></div>
+
+      <div class="tab-panel calc2" data-panel="bmi">
+        <div class="card"><div class="fields"><div><label for="bh">Height (cm)</label><input type="number" id="bh" value="170" min="100" max="230"></div><div><label for="bw">Weight (kg)</label><input type="number" id="bw" value="65" min="25" max="300"></div></div>
+          <p style="margin-top:22px;font-size:.9rem">BMI is a quick screening number for adults. It can’t tell muscle from fat and doesn’t suit everyone — athletes, older adults and some ethnic groups may differ. Your doctor can give a fuller picture.</p></div>
+        <div class="out"><small>Your BMI</small><div class="n" id="bmi">—</div><p id="bmit"></p><div><div class="scale"><i id="bpin" style="--x:30%"></i></div><div style="display:flex;justify-content:space-between;font-family:var(--ff-m);font-size:.68rem;opacity:.8"><span>15</span><span>18.5</span><span>25</span><span>30</span><span>40</span></div></div><p id="brange" style="font-size:.88rem"></p></div>
+      </div>
+
+      <div class="tab-panel calc2" data-panel="cal">
+        <div class="card"><div class="fields">
+          <div><label for="cs">Sex</label><select id="cs"><option value="m">Male</option><option value="f">Female</option></select></div>
+          <div><label for="ca">Age</label><input type="number" id="ca" value="28" min="15" max="90"></div>
+          <div><label for="ch">Height (cm)</label><input type="number" id="ch" value="170" min="100" max="230"></div>
+          <div><label for="cw">Weight (kg)</label><input type="number" id="cw" value="65" min="25" max="300"></div>
+          <div style="grid-column:1/-1"><label for="cact">Activity</label><select id="cact"><option value="1.2">Mostly sitting</option><option value="1.375" selected>Light — 1–3 workouts a week</option><option value="1.55">Moderate — 3–5 workouts a week</option><option value="1.725">Very active — 6–7 workouts a week</option></select></div>
+          <div style="grid-column:1/-1"><label>Goal</label><div class="seg" id="goal"><button data-g="0.9">Gentle loss</button><button data-g="1" class="on">Maintain</button><button data-g="1.1">Gentle gain</button></div></div>
+        </div><p style="margin-top:22px;font-size:.88rem">Uses the Mifflin–St Jeor equation. Avoid crash diets; if food or body image feels stressful, please speak to a doctor or dietitian.</p></div>
+        <div class="out"><small>Estimated daily energy</small><div class="n" id="kcal">—</div><p id="kt">kcal per day for your goal</p>
+          <div class="meals"><div><b id="mp">—</b><small>Protein g</small></div><div><b id="mc">—</b><small>Carbs g</small></div><div><b id="mf">—</b><small>Fat g</small></div></div>
+          <p style="font-size:.86rem">A balanced split of about 25% protein, 45% carbs and 30% fat. Adjust with a professional if you have specific needs.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0"><div class="wrap"><div class="news rv"><div><span class="eyebrow" style="color:inherit;opacity:.8">Next</span><h2 style="margin-top:14px">Read <em>the journal.</em></h2></div><div><a class="btn" style="background:var(--on-accent);color:var(--accent)" href="journal.html">Open the journal <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div></div></section>
+
+<footer id="site-footer"></footer>
+<script src="js/main.js"></script>
+<script>
+(() => {
+  const { $, $$, store } = SOMA;
+  /* ---------- quiz ---------- */
+  const T = { oily: 'Oily', dry: 'Dry', combo: 'Combination', sens: 'Sensitive', norm: 'Normal' };
+  const DESC = {
+    oily: 'Your skin makes plenty of oil. Keep it balanced with a gentle gel cleanser, niacinamide, an oil-free moisturiser and a light SPF.',
+    dry: 'Your skin needs water and a good barrier. Use a creamy cleanser, hyaluronic acid on damp skin, ceramide moisturiser and a hydrating SPF.',
+    combo: 'Oily in the T-zone, drier elsewhere. Use lightweight products overall and add richness to the cheeks only where needed.',
+    sens: 'Your skin reacts easily. Keep routines short and fragrance-free, patch-test new products and choose a mineral SPF.',
+    norm: 'Balanced and comfortable. Protect it with SPF and stay consistent with a simple cleanse, moisturise, protect routine.'
+  };
+  const Q = [
+    ['An hour after washing, with nothing applied, my face feels…', [['Tight, maybe flaky', { dry: 2 }], ['Comfortable', { norm: 2 }], ['Shiny all over', { oily: 2 }], ['Shiny only on forehead and nose', { combo: 2 }], ['Itchy, red or stinging', { sens: 2 }]]],
+    ['By mid-afternoon my face looks…', [['Dull and a bit rough', { dry: 1 }], ['Fresh, about the same', { norm: 1 }], ['Greasy; makeup slides', { oily: 2 }], ['Oily in the middle, fine elsewhere', { combo: 2 }], ['Blotchy or flushed', { sens: 1 }]]],
+    ['My pores are…', [['Barely visible', { dry: 1, norm: 1 }], ['Small and even', { norm: 2 }], ['Large across cheeks and nose', { oily: 2 }], ['Large on nose and forehead only', { combo: 2 }], ['Not the issue — redness is', { sens: 2 }]]],
+    ['When I try a new product…', [['It often feels tight or dry', { dry: 1, sens: 1 }], ['No problem at all', { norm: 2 }], ['I sometimes break out', { oily: 1, combo: 1 }], ['It stings or reddens easily', { sens: 2 }], ['Some areas react, others don’t', { combo: 1 }]]],
+    ['In cold, dry weather my skin…', [['Gets very dry and flaky', { dry: 2 }], ['Stays about the same', { norm: 2 }], ['Actually gets a bit better', { oily: 2 }], ['Cheeks dry, T-zone oily', { combo: 2 }], ['Gets irritated or red', { sens: 2 }]]]
+  ];
+  let qi = 0, sc = {};
+  const box = $('#qbox');
+  const resetQ = () => { qi = 0; sc = { oily: 0, dry: 0, combo: 0, sens: 0, norm: 0 }; showQ(); };
+  function showQ() {
+    $('#qcount').textContent = `Question ${qi + 1} of ${Q.length}`; $('#qbar').style.width = (qi / Q.length * 100) + '%';
+    const [q, o] = Q[qi];
+    box.innerHTML = `<span class="num">QUESTION 0${qi + 1}</span><h3>${q}</h3><div class="opts">${o.map((x, i) => `<button class="opt" data-i="${i}">${x[0]}</button>`).join('')}</div>`;
+    $$('.opt', box).forEach(b => b.onclick = () => { const pts = Q[qi][1][+b.dataset.i][1]; for (const k in pts) sc[k] += pts[k]; qi++; qi < Q.length ? showQ() : result(); });
+  }
+  function result() {
+    $('#qcount').textContent = 'Complete'; $('#qbar').style.width = '100%';
+    const ord = Object.keys(sc).sort((a, b) => sc[b] - sc[a]), top = ord[0], max = Math.max(...Object.values(sc), 1);
+    store.set('skintype', top);
+    box.innerHTML = `<div class="res"><span class="num">YOUR SKIN TYPE</span><h3><em>${T[top]}</em></h3><p class="lead">${DESC[top]}</p>
+      <div class="bars">${ord.map(k => `<div><span>${T[k]}</span><i style="--w:0%" data-w="${sc[k] / max * 100}%"></i><span>${sc[k]}</span></div>`).join('')}</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-p" href="skin.html#type">See my routine</a><button class="btn btn-g" id="again">Retake</button></div></div>`;
+    requestAnimationFrame(() => requestAnimationFrame(() => $$('.bars i', box).forEach(i => i.style.setProperty('--w', i.dataset.w))));
+    $('#again').onclick = resetQ;
+  }
+  resetQ();
+
+  /* ---------- habits ---------- */
+  const D = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], today = (new Date().getDay() + 6) % 7;
+  const wk = () => { const d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() - today); return d.toDateString(); };
+  const DEF = ['Drink enough water', 'Cleanse + SPF', 'Move for 20 minutes', 'Sleep 7+ hours', 'Screens off before bed'];
+  let H = store.get('habits', null);
+  if (!H || !Array.isArray(H.list)) H = { week: wk(), list: DEF.map(n => ({ n, d: [0, 0, 0, 0, 0, 0, 0] })) };
+  if (H.week !== wk()) { H.week = wk(); H.list.forEach(h => h.d = [0, 0, 0, 0, 0, 0, 0]); }
+  const save = () => store.set('habits', H);
+  const esc = s => s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  function drawH() {
+    $('#thead').innerHTML = '<th>Habit</th>' + D.map((d, i) => `<th class="${i === today ? 'today' : ''}">${d}</th>`).join('') + '<th></th>';
+    $('#tbody').innerHTML = H.list.map((h, r) => `<tr><td>${esc(h.n)}</td>${h.d.map((v, i) => `<td><input type="checkbox" data-r="${r}" data-c="${i}" ${v ? 'checked' : ''} aria-label="${esc(h.n)} ${D[i]}"></td>`).join('')}<td>${h.d.reduce((a, b) => a + b, 0)}/7 <button class="del" data-del="${r}" aria-label="Remove habit">×</button></td></tr>`).join('');
+    $$('#tbody input').forEach(c => c.onchange = () => { H.list[+c.dataset.r].d[+c.dataset.c] = c.checked ? 1 : 0; save(); stats(); $$('#tbody tr')[+c.dataset.r].lastElementChild.firstChild.textContent = H.list[+c.dataset.r].d.reduce((a, b) => a + b, 0) + '/7 '; });
+    $$('[data-del]').forEach(b => b.onclick = () => { H.list.splice(+b.dataset.del, 1); save(); drawH(); });
+    stats();
+  }
+  function stats() {
+    const tot = H.list.reduce((a, h) => a + h.d.reduce((x, y) => x + y, 0), 0), max = H.list.length * 7;
+    $('#tdone').textContent = tot; $('#tpct').textContent = max ? Math.round(tot / max * 100) + '%' : '0%';
+    const b = [...H.list].sort((a, c) => c.d.reduce((x, y) => x + y, 0) - a.d.reduce((x, y) => x + y, 0))[0];
+    $('#tbest').textContent = b && b.d.some(Boolean) ? b.n.split(' ').slice(0, 2).join(' ') : '—';
+  }
+  $('#addh').onsubmit = e => { e.preventDefault(); const v = $('#newh').value.trim(); if (!v || H.list.length >= 12) return; H.list.push({ n: v, d: [0, 0, 0, 0, 0, 0, 0] }); $('#newh').value = ''; save(); drawH(); };
+  $('#rst').onclick = () => { H.list.forEach(h => h.d = [0, 0, 0, 0, 0, 0, 0]); save(); drawH(); };
+  drawH();
+
+  /* ---------- BMI ---------- */
+  const num = id => parseFloat($(id).value);
+  function bmi() {
+    const h = num('#bh') / 100, w = num('#bw');
+    if (!(h > 0 && w > 0)) { $('#bmi').textContent = '—'; return; }
+    const v = w / (h * h); $('#bmi').textContent = v.toFixed(1);
+    const c = v < 18.5 ? 'Below the usual healthy range' : v < 25 ? 'Within the usual healthy range' : v < 30 ? 'Above the usual healthy range' : 'Well above the usual healthy range';
+    $('#bmit').textContent = c + '.';
+    $('#bpin').style.setProperty('--x', Math.min(98, Math.max(1, (v - 15) / 25 * 100)) + '%');
+    $('#brange').textContent = `For your height, a BMI of 18.5–24.9 corresponds to roughly ${(18.5 * h * h).toFixed(0)}–${(24.9 * h * h).toFixed(0)} kg.`;
+  }
+  ['#bh', '#bw'].forEach(i => $(i).oninput = bmi); bmi();
+
+  /* ---------- calories ---------- */
+  let goal = 1;
+  function cal() {
+    const a = num('#ca'), h = num('#ch'), w = num('#cw'), act = +$('#cact').value, s = $('#cs').value;
+    if (!(a > 0 && h > 0 && w > 0)) return;
+    const bmr = 10 * w + 6.25 * h - 5 * a + (s === 'm' ? 5 : -161), kc = Math.round(bmr * act * goal / 10) * 10;
+    $('#kcal').textContent = kc.toLocaleString();
+    $('#mp').textContent = Math.round(kc * .25 / 4); $('#mc').textContent = Math.round(kc * .45 / 4); $('#mf').textContent = Math.round(kc * .30 / 9);
+    $('#kt').textContent = goal < 1 ? 'kcal per day (about 10% below maintenance)' : goal > 1 ? 'kcal per day (about 10% above maintenance)' : 'kcal per day to maintain your weight';
+  }
+  ['#ca', '#ch', '#cw', '#cact', '#cs'].forEach(i => $(i).oninput = cal);
+  $$('#goal button').forEach(b => b.onclick = () => { $$('#goal button').forEach(x => x.classList.toggle('on', x === b)); goal = +b.dataset.g; cal(); });
+  cal();
+})();
+</script>
+</body>
+</html>

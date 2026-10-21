@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fitness — Soma</title>
+<meta name="description" content="Build a home workout, run it with an interval timer, and follow a weekly plan that fits real life.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Hanken+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<script>try{var t=JSON.parse(localStorage.getItem('soma-theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}</script>
+<style>
+.p-fit{--lime:#C5DD3F}
+[data-theme=dark] .p-fit{--lime:#D8E86A}
+.big{font-family:var(--ff-d);font-weight:200;font-size:clamp(11rem,40vw,36rem);line-height:.72;letter-spacing:-.09em;color:transparent;-webkit-text-stroke:2px var(--ink);position:absolute;right:4%;bottom:-5%;opacity:.9;pointer-events:none;user-select:none;mix-blend-mode:overlay}
+.stage .btn-p{background:var(--ink);color:var(--bg)}
+.build{display:grid;grid-template-columns:420px 1fr;gap:18px;align-items:start}
+@media(max-width:1000px){.build{grid-template-columns:1fr}}
+.ctrl{display:grid;gap:26px}
+.ctrl .chips{gap:6px}
+.range{display:grid;gap:8px}.range div{display:flex;justify-content:space-between;font-family:var(--ff-m);font-size:.82rem}
+.range b{color:var(--accent)}
+.timer{background:#14120F;color:#F1EBDD;border-radius:30px;padding:clamp(22px,3vw,40px);display:grid;gap:26px;overflow:hidden;position:relative}
+.dial{--p:0;width:min(330px,70vw);aspect-ratio:1;margin:auto;border-radius:50%;display:grid;place-items:center;text-align:center;background:conic-gradient(var(--lime) calc(var(--p)*1%),rgba(255,255,255,.1) 0);position:relative;transition:background .2s}
+.dial::before{content:"";position:absolute;inset:14px;border-radius:50%;background:#14120F}
+.dial.rest{--lime:#6FD3C8}
+.dial>div{position:relative;display:grid;gap:4px;padding:0 24px}
+.dial small{font-family:var(--ff-m);font-size:.74rem;letter-spacing:.16em;color:var(--lime)}
+.dial b{font-family:var(--ff-d);font-weight:250;font-size:clamp(4.4rem,13vw,6.6rem);line-height:.9;letter-spacing:-.05em}
+.dial span{font-size:1.02rem;font-family:var(--ff-d);font-style:italic}
+.cue{text-align:center;color:#B9B2A2;min-height:3em;max-width:46ch;margin:auto;font-size:.95rem}
+.tbtn{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.tbtn .btn-p{background:var(--lime);color:#14120F}
+.tbtn .btn-g{color:#F1EBDD;border-color:rgba(255,255,255,.25);background:transparent}
+.exlist{list-style:none;display:grid;gap:0;counter-reset:e;border-top:1px solid rgba(255,255,255,.14)}
+.exlist li{counter-increment:e;display:flex;gap:14px;align-items:center;padding:13px 6px;border-bottom:1px solid rgba(255,255,255,.14);color:#B9B2A2;transition:.3s}
+.exlist li::before{content:"0" counter(e);font-family:var(--ff-m);font-size:.72rem;color:var(--lime);opacity:.7}
+.exlist li.now{color:#fff;padding-left:16px;background:linear-gradient(90deg,color-mix(in srgb,var(--lime) 20%,transparent),transparent)}
+.exlist li.done{opacity:.35;text-decoration:line-through}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
+.day{padding:20px 16px;border-radius:20px;border:1px solid var(--line);background:var(--surface);display:grid;gap:34px;align-content:space-between;min-height:210px;transition:.4s}
+.day:hover{transform:translateY(-6px);border-color:var(--accent)}
+.day.today{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.day small{font-family:var(--ff-m);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;opacity:.7}
+.day h3{font-size:1.25rem;line-height:1.1}.day p{font-size:.82rem;opacity:.75;margin-top:6px;line-height:1.35}
+.day.rest-d{background:transparent;border-style:dashed}
+@media(max-width:1000px){.week{grid-template-columns:repeat(4,1fr)}}@media(max-width:620px){.week{grid-template-columns:1fr 1fr}}
+.rpe{height:76px;border-radius:99px;background:linear-gradient(90deg,#6FD3C8,#C5DD3F 40%,#F2B134 70%,#D63A1B);position:relative;display:flex;align-items:center;justify-content:space-between;padding:0 30px;color:#14120F;font-family:var(--ff-m);font-size:.8rem;font-weight:500}
+.rpe-l{display:flex;justify-content:space-between;margin-top:14px;color:var(--muted);font-size:.9rem;gap:14px}
+.rpe-l div{max-width:24ch}.rpe-l b{display:block;color:var(--ink);font-family:var(--ff-d);font-weight:400;font-size:1.25rem}
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:900px){.flow{grid-template-columns:1fr 1fr}}@media(max-width:560px){.flow{grid-template-columns:1fr}}
+.pose{display:grid;gap:10px;align-content:space-between;min-height:200px}
+.pose .hold{font-family:var(--ff-d);font-size:3rem;font-weight:250;letter-spacing:-.04em;color:var(--accent);line-height:1}
+.pose .hold small{font-size:.8rem;font-family:var(--ff-m);letter-spacing:.1em;margin-left:6px;color:var(--muted)}
+.rules{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--ink)}
+.rules div{padding:28px 22px 10px 0}.rules div+div{padding-left:22px;border-left:1px solid var(--line)}
+.rules b{font-family:var(--ff-m);font-size:.75rem;color:var(--accent)}.rules h3{margin:12px 0 8px}.rules p{color:var(--muted);font-size:.94rem}
+@media(max-width:900px){.rules{grid-template-columns:1fr 1fr}.rules div,.rules div+div{padding:24px 12px 10px 0;border-left:0;border-bottom:1px solid var(--line)}}
+</style>
+</head>
+<body class="p-fit" data-page="fit">
+<div id="site-header"></div>
+
+<header class="stage grain" style="min-height:min(88vh,800px)">
+  <canvas id="gl" aria-hidden="true"></canvas>
+  <div class="big" aria-hidden="true">20′</div>
+  <div class="stage-in">
+    <span class="eyebrow rv">Chapter 02 — Fitness</span>
+    <h1 class="rv" style="--d:.06s">Move<br><em>daily.</em></h1>
+    <div class="rv" style="--d:.16s;display:flex;flex-wrap:wrap;gap:22px 40px;align-items:center;justify-content:space-between">
+      <p class="lead">No gym, no equipment, no all-or-nothing. Build a workout in ten seconds, press start, and let the timer do the thinking.</p>
+      <a class="btn btn-p" href="#timer">Build a workout <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</header>
+
+<div class="marq" aria-hidden="true"><div><span>Squat</span><span>Push</span><span>Hinge</span><span>Plank</span><span>Stretch</span><span>Breathe</span><span>Squat</span><span>Push</span><span>Hinge</span><span>Plank</span><span>Stretch</span><span>Breathe</span></div></div>
+
+<section id="timer">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">Workout builder</span><h2>Choose. <em>Press start.</em></h2></div>
+    <div class="build">
+      <div class="card ctrl rv">
+        <div><label>Level</label><div class="seg" id="lvl"><button data-v="b" class="on">Beginner</button><button data-v="i">Intermediate</button></div></div>
+        <div><label>Focus</label><div class="chips" id="foc"><button class="chip on" data-v="full">Full body</button><button class="chip" data-v="upper">Upper</button><button class="chip" data-v="lower">Lower</button><button class="chip" data-v="core">Core</button><button class="chip" data-v="mob">Mobility</button></div></div>
+        <div class="range"><div><span>Work</span><b id="wv">40s</b></div><input type="range" id="work" min="20" max="60" step="5" value="40"></div>
+        <div class="range"><div><span>Rest</span><b id="rv2">20s</b></div><input type="range" id="rest" min="10" max="45" step="5" value="20"></div>
+        <div><label>Rounds</label><div class="seg" id="rnd"><button data-v="1" class="on">1</button><button data-v="2">2</button><button data-v="3">3</button></div></div>
+        <p class="mono" id="total" style="font-size:.8rem;color:var(--muted)"></p>
+        <p style="font-size:.85rem;color:var(--muted)">Warm up with 2 minutes of marching and arm circles first. Stop if anything hurts (not just burns).</p>
+      </div>
+      <div class="timer rv" style="--d:.08s">
+        <div class="dial" id="dial"><div><small id="ph">READY</small><b id="clock">00</b><span id="exn">Press start</span></div></div>
+        <p class="cue" id="cue">Your workout appears below. Tap start when you’re ready.</p>
+        <div class="tbtn"><button class="btn btn-p" id="go">Start</button><button class="btn btn-g" id="skip">Skip</button><button class="btn btn-g" id="reset">Reset</button></div>
+        <ol class="exlist" id="list"></ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--surface2);border-radius:40px;margin-inline:12px">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">A week that fits</span><h2>Seven days, <em>two are rest.</em></h2><p class="lead">A balanced starter week. Swap days freely — what matters is that you repeat it.</p></div>
+    <div class="week" id="week">
+      <div class="day rv"><small>Mon</small><div><h3>Full body</h3><p>Squats, push-ups, bridges · 20 min</p></div></div>
+      <div class="day rv" style="--d:.04s"><small>Tue</small><div><h3>Walk + mobility</h3><p>30 min brisk walk, 5 min stretch</p></div></div>
+      <div class="day rv" style="--d:.08s"><small>Wed</small><div><h3>Lower + core</h3><p>Lunges, bridges, dead bugs · 20 min</p></div></div>
+      <div class="day rest-d rv" style="--d:.12s"><small>Thu</small><div><h3>Rest</h3><p>Easy stretching or yoga, if you like</p></div></div>
+      <div class="day rv" style="--d:.16s"><small>Fri</small><div><h3>Upper body</h3><p>Push-ups, dips, planks · 20 min</p></div></div>
+      <div class="day rv" style="--d:.2s"><small>Sat</small><div><h3>Play</h3><p>Cycle, swim, dance, hike · 30–60 min</p></div></div>
+      <div class="day rest-d rv" style="--d:.24s"><small>Sun</small><div><h3>Rest</h3><p>Gentle walk, sleep, meal prep</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">How hard?</span><h2>The <em>talk test.</em></h2><p class="lead">Rate effort from 1 to 10. Most sessions should sit around 5–7: breathing harder, but still able to speak in short sentences.</p></div>
+    <div class="rpe rv"><span>1</span><span>3</span><span>5</span><span>7</span><span>9</span><span>10</span></div>
+    <div class="rpe-l rv"><div><b>Easy</b>Full sentences, no strain</div><div><b>Moderate</b>Short sentences, warm</div><div><b>Hard</b>A few words at a time</div><div style="text-align:right"><b>Max</b>Save for rare moments</div></div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">Cool-down flow</span><h2>Stretch it <em>out.</em></h2><p class="lead">Six gentle holds after a workout, or any evening. Breathe slowly; never bounce.</p></div>
+    <div class="flow">
+      <div class="card pose tilt rv" data-tilt="4"><span class="num">01</span><div><h3>Child’s pose</h3><p>Hips back to heels, arms long. Releases back and shoulders.</p></div><div class="hold">45<small>SEC</small></div></div>
+      <div class="card pose tilt rv" data-tilt="4" style="--d:.05s"><span class="num">02</span><div><h3>Cat-cow</h3><p>Round and arch the spine with your breath.</p></div><div class="hold">10<small>BREATHS</small></div></div>
+      <div class="card pose tilt rv" data-tilt="4" style="--d:.1s"><span class="num">03</span><div><h3>Low lunge</h3><p>Back knee down, hips forward. Opens the hip flexors.</p></div><div class="hold">30<small>SEC / SIDE</small></div></div>
+      <div class="card pose tilt rv" data-tilt="4"><span class="num">04</span><div><h3>Seated forward fold</h3><p>Hinge from the hips, soft knees. For the hamstrings.</p></div><div class="hold">45<small>SEC</small></div></div>
+      <div class="card pose tilt rv" data-tilt="4" style="--d:.05s"><span class="num">05</span><div><h3>Figure-four</h3><p>Ankle over opposite knee, lean in. Eases glutes and hips.</p></div><div class="hold">30<small>SEC / SIDE</small></div></div>
+      <div class="card pose tilt rv" data-tilt="4" style="--d:.1s"><span class="num">06</span><div><h3>Legs up the wall</h3><p>Lie back, legs vertical. Calms the body before sleep.</p></div><div class="hold">2<small>MIN</small></div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">Four rules</span><h2>The boring <em>things that work.</em></h2></div>
+    <div class="rules">
+      <div class="rv"><b>01</b><h3>Form first</h3><p>Slow, controlled reps beat fast, sloppy ones. Quality builds strength and protects joints.</p></div>
+      <div class="rv" style="--d:.05s"><b>02</b><h3>Progress slowly</h3><p>Add a rep, a round or a few seconds each week. Small steps compound.</p></div>
+      <div class="rv" style="--d:.1s"><b>03</b><h3>Recover</h3><p>Muscles grow during rest and sleep. Two rest days a week is a feature, not laziness.</p></div>
+      <div class="rv" style="--d:.15s"><b>04</b><h3>Fuel &amp; hydrate</h3><p>Protein with meals, plenty of water, and carbohydrates around training. See <a href="health.html" style="text-decoration:underline">Health</a>.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0"><div class="wrap"><div class="news rv"><div><span class="eyebrow" style="color:inherit;opacity:.8">Next</span><h2 style="margin-top:14px">Sleep, eat, <em>recover.</em></h2></div><div><a class="btn" style="background:var(--on-accent);color:var(--accent)" href="health.html">Go to Health <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div></div></section>
+
+<footer id="site-footer"></footer>
+<script src="js/main.js"></script>
+<script src="js/shader.js"></script>
+<script>
+(() => {
+  const { $, $$ } = SOMA;
+  const E = (n, c) => ({ n, c });
+  const DB = {
+    full: { b: [E('Chair squat', 'Sit back, tap the chair, stand tall. Chest up.'), E('Incline push-up', 'Hands on a sturdy table or sofa. Body in one line.'), E('Glute bridge', 'Feet flat, squeeze at the top for a second.'), E('High-knee march', 'Drive knees up, swing the arms. Stay light.'), E('Bird dog', 'Opposite arm and leg, keep hips level.'), E('Knee plank', 'Ribs down, shoulders over wrists.')],
+      i: [E('Bodyweight squat', 'Heels down, knees track over toes.'), E('Push-up', 'Elbows about 45° from the body.'), E('Reverse lunge', 'Step back, lower with control, alternate legs.'), E('Squat thrust', 'Hands down, step or hop feet back and in.'), E('Plank', 'Squeeze glutes and quads. Breathe.'), E('Mountain climbers', 'Fast but flat-backed.')] },
+    upper: { b: [E('Incline push-up', 'Hands elevated. Slow lowering.'), E('Plank shoulder taps (knees)', 'Tap each shoulder, keep hips still.'), E('Chair dips', 'Elbows back, shoulders down.'), E('Superman hold', 'Lift chest and legs, long neck.'), E('Arm circles', 'Big, slow circles forwards then back.'), E('Reverse snow angel', 'Lying face down, sweep arms to hips.')],
+      i: [E('Push-up', 'Full range, body straight.'), E('Pike push-up', 'Hips high, head toward the floor.'), E('Chair dips', 'Feet further out for more challenge.'), E('Plank shoulder taps', 'Wide feet for stability.'), E('Superman pull', 'Pull elbows to ribs as you lift.'), E('Diamond push-up', 'Hands close, elbows tucked.')] },
+    lower: { b: [E('Bodyweight squat', 'Sit back and down. Chest proud.'), E('Glute bridge', 'Drive through heels.'), E('Step-back lunge', 'Hold a wall if you need to.'), E('Calf raises', 'Slow up, slower down.'), E('Wall sit', 'Thighs parallel to the floor.'), E('Side-lying leg raise', 'Lift from the hip, toes forward.')],
+      i: [E('Split squat', 'Long stride, drop the back knee.'), E('Single-leg glute bridge', 'One foot up, hips level.'), E('Lateral lunge', 'Sit into one hip, other leg straight.'), E('Wall sit', 'Keep pressing the back into the wall.'), E('Single-leg calf raise', 'Hold a wall for balance.'), E('Squat pulses', 'Stay low, small controlled bounces.')] },
+    core: { b: [E('Dead bug', 'Press the lower back down, lower opposite limbs.'), E('Knee plank', 'Long line from head to knees.'), E('Bird dog', 'Slow. Reach long.'), E('Glute bridge', 'Ribs down, squeeze.'), E('Heel taps', 'Lying down, reach to each heel.'), E('Side plank (knees)', 'Lift hips, stack shoulders.')],
+      i: [E('Plank', 'Brace as if about to be tapped on the stomach.'), E('Bicycle crunch', 'Slow twist, elbow to opposite knee.'), E('Lying leg raise', 'Lower slowly, back flat.'), E('Russian twist', 'Heels down or lifted, turn from the ribs.'), E('Mountain climbers', 'Hips low, steady rhythm.'), E('Side plank', 'Straight from head to feet.')] },
+    mob: { b: [E('Neck and shoulder rolls', 'Slow, gentle circles.'), E('Cat-cow', 'Move with your breath.'), E('Child’s pose', 'Sink hips back, breathe into the back.'), E('Low lunge hip stretch', 'Tuck the pelvis slightly.'), E('Seated forward fold', 'Hinge from the hips.'), E('Lying spinal twist', 'Knees to one side, shoulders down.')],
+      i: [E('World’s greatest stretch', 'Lunge, elbow to instep, then rotate up.'), E('Thoracic rotation', 'On all fours, hand behind head, rotate.'), E('Deep squat hold', 'Heels down, elbows push knees out.'), E('Hip 90/90', 'Switch sides slowly.'), E('Downward dog', 'Pedal the heels, long spine.'), E('Pigeon pose', 'Square hips, fold forward.')] }
+  };
+  const st = { lvl: 'b', foc: 'full', rounds: 1, work: 40, rest: 20 };
+  let steps = [], pos = 0, left = 0, tmr = null, run = false;
+  const dial = $('#dial'), clock = $('#clock'), ph = $('#ph'), exn = $('#exn'), cue = $('#cue'), go = $('#go'), list = $('#list');
+
+  const beep = (f = 880, d = .12) => { try { const a = beep.a || (beep.a = new (window.AudioContext || window.webkitAudioContext)()), o = a.createOscillator(), g = a.createGain(); o.frequency.value = f; g.gain.value = .08; o.connect(g); g.connect(a.destination); o.start(); o.stop(a.currentTime + d); } catch (e) {} };
+
+  function build() {
+    clearInterval(tmr); run = false; go.textContent = 'Start';
+    const ex = DB[st.foc][st.lvl]; steps = [{ t: 'prep', len: 5, name: 'Get ready', c: 'Shake out your arms. First move: ' + ex[0].n }];
+    for (let r = 0; r < st.rounds; r++) ex.forEach((e, i) => { steps.push({ t: 'work', len: st.work, name: e.n, c: e.c, k: r * ex.length + i }); const last = r === st.rounds - 1 && i === ex.length - 1; if (!last) steps.push({ t: 'rest', len: st.rest, name: 'Rest', c: 'Next up: ' + (ex[(i + 1) % ex.length].n), k: -1 }); });
+    list.innerHTML = ''; for (let r = 0; r < st.rounds; r++) ex.forEach(e => { const li = document.createElement('li'); li.textContent = e.n; list.appendChild(li); });
+    const sec = steps.reduce((a, s) => a + s.len, 0); $('#total').textContent = `${ex.length} moves × ${st.rounds} round${st.rounds > 1 ? 's' : ''} · about ${Math.ceil(sec / 60)} min`;
+    pos = 0; load(0, false);
+  }
+  function paintList() { const cur = steps[pos], items = $$('li', list); items.forEach((li, i) => { li.classList.toggle('now', !!cur && cur.t === 'work' && cur.k === i); li.classList.toggle('done', pos >= steps.length || (!!cur && ((cur.t === 'work' && i < cur.k) || (cur.t === 'rest' && i <= steps[pos - 1].k)))); }); }
+  function load(p, beepOn = true) {
+    pos = p; if (p >= steps.length) { ph.textContent = 'DONE'; clock.textContent = '✓'; exn.textContent = 'Well done'; cue.textContent = 'Drink some water and stretch. See you tomorrow.'; dial.style.setProperty('--p', 100); clearInterval(tmr); run = false; go.textContent = 'Again'; paintList(); beep(660, .4); return; }
+    const s = steps[p]; left = s.len; dial.classList.toggle('rest', s.t === 'rest'); ph.textContent = s.t === 'work' ? 'WORK' : s.t === 'rest' ? 'REST' : 'GET READY';
+    exn.textContent = s.name; cue.textContent = s.c; paint(); paintList(); if (beepOn) beep(s.t === 'work' ? 988 : 520);
+  }
+  function paint() { const s = steps[pos]; clock.textContent = String(left).padStart(2, '0'); dial.style.setProperty('--p', ((s.len - left) / s.len) * 100); }
+  function tick() { left--; if (left <= 3 && left > 0) beep(700, .06); if (left <= 0) load(pos + 1); else paint(); }
+  go.onclick = () => { if (pos >= steps.length) { build(); } if (run) { clearInterval(tmr); run = false; go.textContent = 'Resume'; } else { run = true; go.textContent = 'Pause'; beep(600, .05); tmr = setInterval(tick, 1000); } };
+  $('#skip').onclick = () => load(Math.min(pos + 1, steps.length));
+  $('#reset').onclick = build;
+
+  const seg = (id, key, num) => $$('#' + id + ' [data-v]').forEach(b => b.onclick = () => { $$('#' + id + ' [data-v]').forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-pressed', x === b); }); st[key] = num ? +b.dataset.v : b.dataset.v; build(); });
+  seg('lvl', 'lvl'); seg('foc', 'foc'); seg('rnd', 'rounds', true);
+  $('#work').oninput = e => { st.work = +e.target.value; $('#wv').textContent = st.work + 's'; build(); };
+  $('#rest').oninput = e => { st.rest = +e.target.value; $('#rv2').textContent = st.rest + 's'; build(); };
+  build();
+
+  const d = (new Date().getDay() + 6) % 7; const days = $$('#week .day'); if (days[d]) days[d].classList.add('today');
+})();
+</script>
+</body>
+</html>

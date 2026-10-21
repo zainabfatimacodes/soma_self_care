@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grooming — Soma</title>
+<meta name="description" content="Shaving, beards, brows, hair, fragrance and hygiene — grooming guidance for men, women and everyone.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Hanken+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<script>try{var t=JSON.parse(localStorage.getItem('soma-theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}</script>
+<style>
+.gh{margin:-76px 12px 0;border-radius:34px;background:linear-gradient(165deg,#1A2A4A,#0C1527);color:#F3E7CF;position:relative;overflow:hidden;min-height:min(90vh,820px);display:flex;align-items:flex-end}
+.gh::before{content:"";position:absolute;inset:-20%;background:repeating-linear-gradient(115deg,transparent 0 46px,rgba(224,182,92,.16) 46px 47px);transform:skew(-4deg)}
+.gh::after{content:"";position:absolute;right:-8%;top:8%;width:52vmin;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 35%,rgba(224,182,92,.55),rgba(224,182,92,.08) 62%,transparent 70%)}
+.gh .wrap{position:relative;z-index:2;padding:150px 0 50px;display:grid;gap:34px}
+.gh h1 em{color:#E0B65C}.gh .eyebrow{color:#E0B65C}.gh .lead{color:#D9CDB4}
+.gh .seg{background:rgba(255,255,255,.1)}.gh .seg button{color:#D9CDB4}.gh .seg button.on{background:#E0B65C;color:#14213A}
+.gh .row{display:flex;flex-wrap:wrap;gap:24px 40px;align-items:flex-end;justify-content:space-between}
+.sched{border-top:1px solid var(--ink)}
+.sr-row{display:grid;grid-template-columns:90px 1.2fr 1.6fr auto;gap:20px;align-items:center;padding:22px 6px;border-bottom:1px solid var(--line);transition:.4s}
+.sr-row:hover{background:var(--accent-soft);padding-left:20px}
+.sr-row b{font-family:var(--ff-m);font-size:.76rem;color:var(--accent);letter-spacing:.1em}
+.sr-row h3{font-size:1.5rem}.sr-row p{color:var(--muted);font-size:.95rem}
+.sr-row em{font-family:var(--ff-d);font-style:italic;font-size:1.4rem;color:var(--accent);text-align:right;white-space:nowrap}
+@media(max-width:760px){.sr-row{grid-template-columns:1fr auto}.sr-row b,.sr-row p{display:none}}
+.ritual-g{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:r}
+.rt{counter-increment:r;padding:30px;border-radius:26px;background:var(--surface);border:1px solid var(--line);display:grid;gap:12px;align-content:start;transition:.5s}
+.rt::before{content:counter(r,decimal-leading-zero);font-family:var(--ff-d);font-size:3.4rem;font-weight:200;font-style:italic;color:var(--accent);line-height:1;letter-spacing:-.04em}
+.rt h3{font-size:1.45rem}.rt p{color:var(--muted);font-size:.95rem}
+@media(max-width:900px){.ritual-g{grid-template-columns:1fr 1fr}}@media(max-width:560px){.ritual-g{grid-template-columns:1fr}}
+.sub{display:flex;align-items:baseline;gap:18px;margin-bottom:26px;flex-wrap:wrap}
+.sub h3{font-size:clamp(1.9rem,3.4vw,2.8rem)}.sub span{font-family:var(--ff-m);font-size:.74rem;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.beard{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:800px){.beard{grid-template-columns:1fr}}
+.beard .card h3{font-size:1.7rem}.beard .card .len{font-family:var(--ff-m);font-size:.74rem;letter-spacing:.1em;color:var(--accent)}
+.shapes{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.shape{display:grid;gap:16px;align-content:start;padding:24px 20px}
+.shape svg{width:84px;height:100px;margin:auto}
+.shape svg *{fill:var(--accent-soft);stroke:var(--accent);stroke-width:2.5}
+.shape h3{font-size:1.35rem;text-align:center}.shape p{font-size:.88rem;color:var(--muted)}
+.shape p b{display:block;font-family:var(--ff-m);font-size:.66rem;letter-spacing:.1em;color:var(--accent);margin-bottom:3px;text-transform:uppercase;font-weight:500}
+@media(max-width:1060px){.shapes{grid-template-columns:repeat(3,1fr)}}@media(max-width:620px){.shapes{grid-template-columns:1fr 1fr}}@media(max-width:420px){.shapes{grid-template-columns:1fr}}
+.scent{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(24px,5vw,80px);align-items:center}
+@media(max-width:900px){.scent{grid-template-columns:1fr}}
+.pyr{display:grid;gap:8px;max-width:460px;margin:auto}
+.pyr div{padding:22px 26px;text-align:center;color:#14213A;display:grid;gap:2px;transition:.5s}
+.pyr div:hover{transform:scale(1.03)}
+.pyr b{font-family:var(--ff-d);font-weight:400;font-size:1.5rem}.pyr small{font-family:var(--ff-m);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;opacity:.75}
+.pyr div:nth-child(1){clip-path:polygon(32% 0,68% 0,84% 100%,16% 100%);background:#F4DEA0;padding-block:34px 18px}
+.pyr div:nth-child(2){clip-path:polygon(16% 0,84% 0,92% 100%,8% 100%);background:#E0B65C}
+.pyr div:nth-child(3){clip-path:polygon(8% 0,92% 0,100% 100%,0 100%);background:#B98A2E;color:#fff}
+.hy{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:1000px){.hy{grid-template-columns:1fr 1fr}}@media(max-width:560px){.hy{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="p-groom" data-page="groom">
+<div id="site-header"></div>
+
+<header class="gh">
+  <div class="wrap">
+    <span class="eyebrow rv">Chapter 04 — Grooming</span>
+    <h1 class="rv" style="--d:.06s">The finishing<br><em>touch.</em></h1>
+    <div class="row rv" style="--d:.14s">
+      <p class="lead" style="max-width:48ch">Looking put-together isn’t vanity; it’s respect for yourself. Choose who the advice is for and the page will follow you.</p>
+      <div class="seg aud-switch" role="group" aria-label="Show grooming advice for"><button data-aud="all">Everyone</button><button data-aud="men">Men</button><button data-aud="women">Women</button></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">The rhythm</span><h2>How often, <em>really?</em></h2><p class="lead">A realistic maintenance calendar. Adjust to your hair growth and lifestyle.</p></div>
+    <div class="sched rv">
+      <div class="sr-row" data-for="men"><b>01</b><h3>Shave</h3><p>Daily to every few days, depending on preference and skin comfort.</p><em>as needed</em></div>
+      <div class="sr-row" data-for="men"><b>02</b><h3>Beard trim</h3><p>Tidy the neckline and cheek line to keep the shape clean.</p><em>weekly</em></div>
+      <div class="sr-row" data-for="women"><b>03</b><h3>Brow tidy</h3><p>Remove only stray hairs outside your natural line, by tweezing, threading or waxing.</p><em>every 2–4 weeks</em></div>
+      <div class="sr-row" data-for="all"><b>04</b><h3>Haircut or trim</h3><p>Shorter styles lose shape faster; longer hair needs trims to prevent split ends.</p><em>4–10 weeks</em></div>
+      <div class="sr-row" data-for="all"><b>05</b><h3>Hands &amp; nails</h3><p>Trim, file and moisturise cuticles. Clean nails make a quiet difference.</p><em>weekly</em></div>
+      <div class="sr-row" data-for="all"><b>06</b><h3>Exfoliate</h3><p>A gentle chemical or soft physical exfoliant on face and body, then moisturise.</p><em>1–2× a week</em></div>
+      <div class="sr-row" data-for="all"><b>07</b><h3>Dental care</h3><p>Brush twice daily for two minutes, floss once, and see a dentist about every six months.</p><em>daily</em></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--surface2);border-radius:40px;margin-inline:12px">
+  <div class="wrap">
+    <div data-for="men" style="margin-bottom:80px">
+      <div class="sub rv"><span>For him</span><h3>The comfortable shave</h3></div>
+      <div class="ritual-g">
+        <div class="rt rv"><h3>Soften</h3><p>Shave after a warm shower, or hold a warm wet towel on the face for a minute.</p></div>
+        <div class="rt rv" style="--d:.05s"><h3>Prep</h3><p>Apply a real shaving cream or gel and let it sit for 30 seconds. Skip the pressurised-foam shortcuts if you’re prone to irritation.</p></div>
+        <div class="rt rv" style="--d:.1s"><h3>Go with the grain</h3><p>First pass in the direction of hair growth with light pressure. Let the blade do the work.</p></div>
+        <div class="rt rv"><h3>Re-lather if needed</h3><p>For a closer finish, lather again and go across or lightly against the grain only where your skin allows it.</p></div>
+        <div class="rt rv" style="--d:.05s"><h3>Cool rinse</h3><p>Rinse with cool water, pat dry, don’t rub.</p></div>
+        <div class="rt rv" style="--d:.1s"><h3>Calm &amp; protect</h3><p>Alcohol-free balm or lotion. Replace blades every 5–7 shaves, or sooner if they pull.</p></div>
+      </div>
+    </div>
+    <div data-for="women">
+      <div class="sub rv"><span>For her</span><h3>Smooth skin, no irritation</h3></div>
+      <div class="ritual-g">
+        <div class="rt rv"><h3>Exfoliate first</h3><p>A gentle scrub or cloth the day before helps prevent ingrown hairs.</p></div>
+        <div class="rt rv" style="--d:.05s"><h3>Wet &amp; lather</h3><p>Shave after a few minutes in warm water. Always use shaving cream or a conditioner, never dry.</p></div>
+        <div class="rt rv" style="--d:.1s"><h3>Short, light strokes</h3><p>With the direction of growth, with a clean, sharp razor. Go slowly around knees and ankles.</p></div>
+        <div class="rt rv"><h3>Rinse &amp; pat</h3><p>Cool rinse, pat dry, no friction.</p></div>
+        <div class="rt rv" style="--d:.05s"><h3>Moisturise</h3><p>A fragrance-free lotion or oil within a few minutes. Skip deodorant right after shaving underarms if it stings.</p></div>
+        <div class="rt rv" style="--d:.1s"><h3>Other options</h3><p>Waxing, sugaring, epilating and laser each have trade-offs; patch-test and consult a professional.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-for="men">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">Beards</span><h2>Grow it, <em>or keep it clean.</em></h2></div>
+    <div class="beard">
+      <div class="card tilt rv" data-tilt="4"><span class="len">0–1 MM · STUBBLE</span><h3>Designer stubble</h3><p>Use a trimmer with a guard, define the neckline and cheek line, and moisturise the skin underneath.</p></div>
+      <div class="card tilt rv" data-tilt="4" style="--d:.06s"><span class="len">2–6 MM · SHORT</span><h3>Short beard</h3><p>Wash with a gentle cleanser, comb daily, use a light balm and keep a crisp neckline about two fingers above the Adam’s apple.</p></div>
+      <div class="card tilt rv" data-tilt="4" style="--d:.12s"><span class="len">10 MM+ · FULL</span><h3>Full beard</h3><p>Brush, oil nightly, and trim ends every few weeks. The first month itches — don’t quit early.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">Hair &amp; face shape</span><h2>Frame <em>your face.</em></h2><p class="lead">A starting point, not a rule. Hair texture, lifestyle and personality matter more than geometry.</p></div>
+    <div class="shapes">
+      <div class="card shape tilt rv" data-tilt="6"><svg viewBox="0 0 90 110"><ellipse cx="45" cy="55" rx="34" ry="46"/></svg><h3>Oval</h3><p><b>Good news</b>Most styles suit you.</p><p data-for="men"><b>Him</b>Crop, quiff or longer; beards of any length.</p><p data-for="women"><b>Her</b>Bob, layers, updos, fringe — pick what you love.</p></div>
+      <div class="card shape tilt rv" data-tilt="6" style="--d:.05s"><svg viewBox="0 0 90 110"><circle cx="45" cy="55" r="40"/></svg><h3>Round</h3><p><b>Aim</b>Add height and angles.</p><p data-for="men"><b>Him</b>Volume on top, short sides, a short angular beard.</p><p data-for="women"><b>Her</b>Long layers, side parts, long lobs.</p></div>
+      <div class="card shape tilt rv" data-tilt="6" style="--d:.1s"><svg viewBox="0 0 90 110"><rect x="8" y="10" width="74" height="90" rx="12"/></svg><h3>Square</h3><p><b>Aim</b>Soften the jaw.</p><p data-for="men"><b>Him</b>Textured crop, longer top, a slightly rounded beard line.</p><p data-for="women"><b>Her</b>Soft waves, side-swept fringe, layers past the jaw.</p></div>
+      <div class="card shape tilt rv" data-tilt="6" style="--d:.15s"><svg viewBox="0 0 90 110"><path d="M10 28Q45 4 80 28Q86 62 45 102Q4 62 10 28Z"/></svg><h3>Heart</h3><p><b>Aim</b>Balance a wider forehead.</p><p data-for="men"><b>Him</b>Side-swept fringe, medium length, fuller beard.</p><p data-for="women"><b>Her</b>Chin-length cuts, side fringe, volume at the jaw.</p></div>
+      <div class="card shape tilt rv" data-tilt="6" style="--d:.2s"><svg viewBox="0 0 90 110"><ellipse cx="45" cy="55" rx="29" ry="50"/></svg><h3>Oblong</h3><p><b>Aim</b>Add width, not height.</p><p data-for="men"><b>Him</b>Fuller sides, fringe, avoid very tall quiffs.</p><p data-for="women"><b>Her</b>Fringe, waves and volume at the sides.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--surface2);border-radius:40px;margin-inline:12px">
+  <div class="wrap scent">
+    <div class="pyr rv" aria-label="Fragrance pyramid: top, heart, base notes"><div><b>Top notes</b><small>0–15 min · citrus, herbs</small></div><div><b>Heart notes</b><small>20 min–3 h · florals, spice</small></div><div><b>Base notes</b><small>3 h+ · woods, musk, amber</small></div></div>
+    <div>
+      <div class="sec-head rv" style="margin-bottom:22px"><span class="eyebrow">Fragrance</span><h2>Scent, <em>with restraint.</em></h2></div>
+      <div class="rv">
+        <details open><summary>Where to apply</summary><p>On moisturised pulse points — wrists, neck, behind the ears. Moisturised skin holds scent longer. Don’t rub your wrists together.</p></details>
+        <details><summary>How much</summary><p>One to three sprays is plenty. If you can smell it strongly on yourself all day, others probably can too.</p></details>
+        <details><summary>Match the moment</summary><p>Fresh citrus and aquatic notes for heat and the day; warm woods, amber and vanilla for evening and winter.</p></details>
+        <details><summary>Test before you buy</summary><p>Spray on skin and wait an hour. Scent changes as it dries down. Check the label if you have sensitive skin.</p></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">Hygiene essentials</span><h2>The quiet <em>basics.</em></h2></div>
+    <div class="hy">
+      <div class="card tilt rv" data-tilt="5"><span class="num">MOUTH</span><h3>Fresh &amp; healthy</h3><p>Brush twice, floss daily, clean your tongue. Replace the brush every three months.</p></div>
+      <div class="card tilt rv" data-tilt="5" style="--d:.05s"><span class="num">BODY</span><h3>Clean &amp; dry</h3><p>Wash daily, dry well between toes and in folds. Use deodorant; antiperspirant if you sweat heavily.</p></div>
+      <div class="card tilt rv" data-tilt="5" style="--d:.1s"><span class="num">HANDS &amp; FEET</span><h3>Care for the ends</h3><p>Trim nails straight across for toes. Moisturise feet at night and wear breathable socks.</p></div>
+      <div class="card tilt rv" data-tilt="5" style="--d:.15s"><span class="num">CLOTHES</span><h3>Fresh &amp; fitting</h3><p>Clean, ironed and well-fitting clothes outdo expensive ones. Fresh underwear and socks daily.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0"><div class="wrap"><div class="news rv"><div><span class="eyebrow" style="color:inherit;opacity:.8">Next</span><h2 style="margin-top:14px">Make it <em>yours.</em></h2></div><div><a class="btn" style="background:var(--on-accent);color:var(--accent)" href="tools.html">Try the tools <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div></div></section>
+
+<footer id="site-footer"></footer>
+<script src="js/main.js"></script>
+</body>
+</html>

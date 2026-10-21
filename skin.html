@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Skin & Beauty — Soma</title>
+<meta name="description" content="Skincare routines by skin type, an ingredient index, hair care and makeup basics. Clear, honest and simple.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Hanken+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<script>try{var t=JSON.parse(localStorage.getItem('soma-theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}</script>
+<style>
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(24px,5vw,70px);align-items:center;padding-top:30px;padding-bottom:clamp(60px,8vw,110px)}
+.hero h1{margin:22px 0 26px}
+.hero .chips{margin-top:30px}
+.skin-art{border-radius:34px;overflow:hidden;background:#8E3F20;box-shadow:var(--shadow)}
+.skin-art svg{width:100%;height:auto}
+@media(max-width:900px){.hero{grid-template-columns:1fr}}
+.found{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--ink);border-bottom:1px solid var(--line)}
+.found>div{padding:34px 26px 38px;border-right:1px solid var(--line);transition:background .4s}
+.found>div:last-child{border:0}.found>div:hover{background:var(--accent-soft)}
+.found b{font-family:var(--ff-d);font-weight:250;font-style:italic;font-size:5rem;line-height:.9;color:var(--accent);display:block;margin-bottom:22px}
+.found h3{margin-bottom:10px}.found p{color:var(--muted);font-size:.96rem}
+@media(max-width:900px){.found{grid-template-columns:1fr 1fr}.found>div:nth-child(2){border-right:0}.found>div{border-bottom:1px solid var(--line)}}
+@media(max-width:560px){.found{grid-template-columns:1fr}.found>div{border-right:0}}
+.type{display:grid;grid-template-columns:1fr 1.4fr;gap:20px}
+.type-l{background:var(--accent);color:var(--on-accent);border-radius:var(--r);padding:clamp(26px,4vw,44px);display:flex;flex-direction:column;justify-content:space-between;gap:30px;min-height:360px}
+.type-l h3{font-size:clamp(2.4rem,4.6vw,4rem);color:inherit}.type-l p{opacity:.9}
+.type-l .feel{font-family:var(--ff-m);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;opacity:.8}
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.steps ol{list-style:none;counter-reset:s;display:grid;gap:12px;margin-top:14px}
+.steps li{counter-increment:s;display:flex;gap:14px;color:var(--muted);font-size:.96rem}
+.steps li::before{content:counter(s);flex:none;width:26px;height:26px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-family:var(--ff-m);font-size:.74rem;margin-top:2px}
+.steps li b{color:var(--ink);font-weight:600}
+.dd{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:900px){.type,.steps,.dd{grid-template-columns:1fr}.type-l{min-height:0}}
+.ing{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ing article{display:grid;gap:12px;align-content:start;transition:transform .4s,opacity .4s}
+.ing article.off{display:none}
+.ing h3{margin:2px 0}
+.ing dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:.9rem;border-top:1px dashed var(--line);padding-top:14px}
+.ing dt{font-family:var(--ff-m);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);padding-top:.25em}
+.ing dd{color:var(--muted)}
+@media(max-width:900px){.ing{grid-template-columns:1fr 1fr}}@media(max-width:620px){.ing{grid-template-columns:1fr}}
+.layer{display:flex;gap:0;overflow-x:auto;border-radius:var(--r);border:1px solid var(--line);scrollbar-width:none}
+.layer div{flex:1 0 150px;padding:26px 22px;border-right:1px solid var(--line);background:linear-gradient(180deg,var(--surface),color-mix(in srgb,var(--accent) calc(var(--k)*1%),var(--surface)))}
+.layer div:last-child{border:0}
+.layer span{font-family:var(--ff-m);font-size:.7rem;color:var(--accent);letter-spacing:.1em}
+.layer b{display:block;font-family:var(--ff-d);font-size:1.4rem;font-weight:400;margin:6px 0}.layer small{color:var(--muted);font-size:.85rem;display:block;line-height:1.4}
+.two{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(24px,5vw,80px);align-items:start}
+@media(max-width:900px){.two{grid-template-columns:1fr}}
+.mk{background:var(--accent);color:var(--on-accent);border-radius:30px;padding:clamp(28px,4vw,50px)}
+.mk .eyebrow{color:inherit;opacity:.8}.mk h2{color:inherit;margin:16px 0 24px}.mk h2 em{color:inherit;opacity:.78}
+.mk ol{display:grid;gap:0;list-style:none;counter-reset:m}
+.mk li{counter-increment:m;display:grid;grid-template-columns:44px 1fr;gap:6px;padding:16px 0;border-top:1px solid color-mix(in srgb,currentColor 28%,transparent)}
+.mk li::before{content:"0" counter(m);font-family:var(--ff-m);font-size:.8rem;padding-top:.3em;opacity:.7}
+.mk li b{display:block;font-family:var(--ff-d);font-weight:400;font-size:1.35rem;letter-spacing:-.01em}.mk li span{opacity:.85;font-size:.95rem}
+</style>
+</head>
+<body class="p-skin" data-page="skin">
+<div id="site-header"></div>
+
+<main>
+<div class="wrap hero">
+  <div>
+    <span class="eyebrow rv">Chapter 01 — Skin &amp; Beauty</span>
+    <h1 class="rv" style="--d:.06s">Skin,<br><em>understood.</em></h1>
+    <p class="lead rv" style="--d:.14s">Your skin is your largest organ and it asks for very little: clean, hydrated, protected. Here is how to do that for your type, in plain language.</p>
+    <div class="chips rv" style="--d:.2s"><a class="chip" href="#foundation">The foundation</a><a class="chip" href="#type">By skin type</a><a class="chip" href="#ingredients">Ingredients</a><a class="chip" href="#hair">Hair</a><a class="chip" href="#makeup">Makeup</a><a class="chip" href="#myths">Myths</a></div>
+  </div>
+  <div class="skin-art tilt rv" data-tilt="5" style="--d:.1s">
+    <svg viewBox="0 0 420 470" role="img" aria-label="Cross-section of skin showing epidermis, dermis and hypodermis">
+      <rect width="420" height="470" fill="#8E3F20"/>
+      <path d="M0 110Q35 92 70 110T140 110T210 110T280 110T350 110T420 110V172H0Z" fill="#F6D3B3"/>
+      <rect y="172" width="420" height="170" fill="#E9A57A"/>
+      <rect y="342" width="420" height="128" fill="#D98A5E"/>
+      <g fill="#F2B98F" opacity=".7"><circle cx="40" cy="400" r="26"/><circle cx="110" cy="430" r="22"/><circle cx="180" cy="395" r="28"/><circle cx="260" cy="430" r="24"/><circle cx="340" cy="398" r="27"/><circle cx="395" cy="440" r="20"/></g>
+      <path d="M210 328V108Q212 62 232 20" stroke="#2A1608" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <path d="M196 328Q210 300 224 328Q222 350 210 352Q198 350 196 328Z" fill="#2A1608"/>
+      <path d="M110 120V250" stroke="#7A3516" stroke-width="3" fill="none" stroke-dasharray="2 5" stroke-linecap="round"/>
+      <path d="M110 250q-22 6-16 22t26 8q22-6 14-24t-24-6" stroke="#7A3516" stroke-width="3" fill="none"/>
+      <path d="M0 232Q60 210 110 232T230 232T350 232T420 222" stroke="#C8472B" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M0 300Q80 280 160 300T320 296T420 290" stroke="#C8472B" stroke-width="3" fill="none" opacity=".7"/>
+      <g font-family="DM Mono,monospace" font-size="11.5" letter-spacing="1.2">
+        <text x="262" y="146" fill="#4A200D">EPIDERMIS</text><text x="262" y="162" fill="#4A200D" opacity=".75" font-size="10">THE BARRIER</text>
+        <text x="262" y="262" fill="#4A200D">DERMIS</text><text x="262" y="278" fill="#4A200D" opacity=".75" font-size="10">COLLAGEN · VESSELS</text>
+        <text x="262" y="372" fill="#4A200D">HYPODERMIS</text><text x="262" y="388" fill="#4A200D" opacity=".75" font-size="10">CUSHION · WARMTH</text>
+        <text x="22" y="38" fill="#FFD9B8" font-size="12">≈ 2 mm of you</text>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<section id="foundation" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">The foundation</span><h2>Four steps. <em>That’s the whole secret.</em></h2><p class="lead">Everything else is optional. Get these four right, every day, before you buy anything else.</p></div>
+    <div class="found">
+      <div class="rv"><b>1</b><h3>Cleanse</h3><p>Remove dirt, oil and sunscreen with a gentle, non-stripping cleanser. Twice a day is enough; skin should never feel tight afterwards.</p></div>
+      <div class="rv" style="--d:.06s"><b>2</b><h3>Treat</h3><p>Optional targeted serum for one concern — acne, dullness, ageing. Add one product at a time, a few weeks apart.</p></div>
+      <div class="rv" style="--d:.12s"><b>3</b><h3>Moisturise</h3><p>Locks in water and supports the skin barrier. Even oily skin needs it — choose a lighter gel formula.</p></div>
+      <div class="rv" style="--d:.18s"><b>4</b><h3>Protect</h3><p>Broad-spectrum SPF 30+ every morning, and reapply about every two hours in strong sun.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="type" style="background:var(--accent-soft);border-radius:40px;margin-inline:12px">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">By skin type</span><h2>Find your <em>routine.</em></h2><p class="lead">Not sure of your type? Take the 2-minute <a href="tools.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:4px">skin quiz</a>.</p></div>
+    <div data-tabs>
+      <div class="tabs-nav"><button class="chip" data-tab="oily">Oily</button><button class="chip" data-tab="dry">Dry</button><button class="chip" data-tab="combo">Combination</button><button class="chip" data-tab="sens">Sensitive</button><button class="chip" data-tab="norm">Normal</button></div>
+
+      <div class="tab-panel type" data-panel="oily">
+        <div class="type-l"><span class="feel">Shiny by midday · visible pores</span><div><h3>Oily</h3><p>Balance, don’t strip. Over-cleansing makes skin produce even more oil.</p></div></div>
+        <div class="steps">
+          <div class="card"><span class="num">MORNING</span><ol><li><b>Gel or foam cleanser</b> — gentle, rinse with lukewarm water</li><li><b>Niacinamide serum</b> — helps balance oil</li><li><b>Light gel moisturiser</b> — oil-free</li><li><b>Matte or gel SPF 30+</b></li></ol></div>
+          <div class="card"><span class="num">EVENING</span><ol><li><b>Cleanse</b> (double cleanse if wearing SPF or makeup)</li><li><b>Salicylic acid</b> 2–3 nights a week</li><li><b>Light moisturiser</b></li></ol></div>
+          <div class="dd"><div class="card"><span class="num">LOOK FOR</span><ul class="tick"><li>Niacinamide, salicylic acid, clay</li><li>“Non-comedogenic” labels</li></ul></div><div class="card"><span class="num">AVOID</span><ul class="tick"><li>Harsh scrubs and alcohol-heavy toners</li><li>Heavy, occlusive creams</li></ul></div></div>
+        </div>
+      </div>
+
+      <div class="tab-panel type" data-panel="dry">
+        <div class="type-l"><span class="feel">Tight · flaky · dull</span><div><h3>Dry</h3><p>Dry skin lacks oil; it needs water, then something to seal it in.</p></div></div>
+        <div class="steps">
+          <div class="card"><span class="num">MORNING</span><ol><li><b>Rinse or cream cleanser</b> — no foaming</li><li><b>Hyaluronic acid</b> on damp skin</li><li><b>Rich moisturiser</b> with ceramides</li><li><b>Hydrating SPF 30+</b></li></ol></div>
+          <div class="card"><span class="num">EVENING</span><ol><li><b>Cream or balm cleanser</b></li><li><b>Hydrating serum</b></li><li><b>Barrier cream</b>, then a thin layer of balm on dry patches</li></ol></div>
+          <div class="dd"><div class="card"><span class="num">LOOK FOR</span><ul class="tick"><li>Ceramides, glycerin, squalane</li><li>Hyaluronic acid on damp skin</li></ul></div><div class="card"><span class="num">AVOID</span><ul class="tick"><li>Very hot showers</li><li>Strong foaming cleansers</li></ul></div></div>
+        </div>
+      </div>
+
+      <div class="tab-panel type" data-panel="combo">
+        <div class="type-l"><span class="feel">Oily T-zone · drier cheeks</span><div><h3>Combination</h3><p>Treat zones differently: lighter products on the T-zone, richer on dry areas.</p></div></div>
+        <div class="steps">
+          <div class="card"><span class="num">MORNING</span><ol><li><b>Gentle gel cleanser</b></li><li><b>Niacinamide</b> all over</li><li><b>Light moisturiser</b>, a little more on cheeks</li><li><b>SPF 30+</b></li></ol></div>
+          <div class="card"><span class="num">EVENING</span><ol><li><b>Cleanse</b></li><li><b>BHA on T-zone</b> 2 nights a week</li><li><b>Hydrating serum</b> on cheeks</li><li><b>Moisturiser</b></li></ol></div>
+          <div class="dd"><div class="card"><span class="num">LOOK FOR</span><ul class="tick"><li>Balanced, lightweight formulas</li><li>Multi-masking (clay only where oily)</li></ul></div><div class="card"><span class="num">AVOID</span><ul class="tick"><li>One heavy product for the whole face</li></ul></div></div>
+        </div>
+      </div>
+
+      <div class="tab-panel type" data-panel="sens">
+        <div class="type-l"><span class="feel">Stings · reddens easily</span><div><h3>Sensitive</h3><p>Keep it minimal and fragrance-free. Patch-test anything new for 48 hours.</p></div></div>
+        <div class="steps">
+          <div class="card"><span class="num">MORNING</span><ol><li><b>Lukewarm water</b> or a very mild cleanser</li><li><b>Soothing moisturiser</b> (centella, oat, ceramides)</li><li><b>Mineral SPF</b> (zinc oxide)</li></ol></div>
+          <div class="card"><span class="num">EVENING</span><ol><li><b>Mild cleanser</b></li><li><b>Barrier-repair cream</b></li></ol></div>
+          <div class="dd"><div class="card"><span class="num">LOOK FOR</span><ul class="tick"><li>Fragrance-free, short ingredient lists</li><li>Azelaic acid for redness</li></ul></div><div class="card"><span class="num">AVOID</span><ul class="tick"><li>Fragrance, essential oils, many actives at once</li><li>Persistent redness or burning? See a dermatologist</li></ul></div></div>
+        </div>
+      </div>
+
+      <div class="tab-panel type" data-panel="norm">
+        <div class="type-l"><span class="feel">Comfortable · balanced</span><div><h3>Normal</h3><p>Lucky you. Protect what you have and stay consistent.</p></div></div>
+        <div class="steps">
+          <div class="card"><span class="num">MORNING</span><ol><li><b>Gentle cleanser</b></li><li><b>Vitamin C</b> (optional)</li><li><b>Moisturiser</b></li><li><b>SPF 30+</b></li></ol></div>
+          <div class="card"><span class="num">EVENING</span><ol><li><b>Cleanse</b></li><li><b>Retinol</b> 2–3 nights a week (optional)</li><li><b>Moisturiser</b></li></ol></div>
+          <div class="dd"><div class="card"><span class="num">LOOK FOR</span><ul class="tick"><li>Antioxidants in the morning</li><li>Consistency over complexity</li></ul></div><div class="card"><span class="num">AVOID</span><ul class="tick"><li>Skipping sunscreen</li></ul></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-bottom:0">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">Layering</span><h2>Thinnest <em>to thickest.</em></h2></div>
+    <div class="layer rv">
+      <div style="--k:2"><span>01</span><b>Cleanser</b><small>Wash off and rinse</small></div>
+      <div style="--k:5"><span>02</span><b>Toner / essence</b><small>Optional hydration</small></div>
+      <div style="--k:9"><span>03</span><b>Serum</b><small>Targeted treatment</small></div>
+      <div style="--k:14"><span>04</span><b>Moisturiser</b><small>Seals everything in</small></div>
+      <div style="--k:20"><span>05</span><b>Sunscreen</b><small>Always last in the morning</small></div>
+    </div>
+  </div>
+</section>
+
+<section id="ingredients">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">Ingredient index</span><h2>What it does, <em>honestly.</em></h2><p class="lead">Filter by what you want to fix. Start with one active at a time.</p></div>
+    <div class="chips rv" id="ifilter" style="margin-bottom:30px">
+      <button class="chip on" data-f="all">All</button><button class="chip" data-f="acne">Acne</button><button class="chip" data-f="age">Ageing</button><button class="chip" data-f="dry">Dryness</button><button class="chip" data-f="dull">Dullness</button><button class="chip" data-f="sun">Sun</button>
+    </div>
+    <div class="ing">
+      <article class="card tilt" data-tilt="4" data-c="acne dull"><span class="tag">Balances</span><h3>Niacinamide</h3><p>Calms, helps regulate oil and supports the barrier.</p><dl><dt>Use</dt><dd>AM or PM</dd><dt>Pairs</dt><dd>Almost everything</dd><dt>Note</dt><dd>Start at 2–5%</dd></dl></article>
+      <article class="card tilt" data-tilt="4" data-c="age acne"><span class="tag">Renews</span><h3>Retinol</h3><p>Smooths texture and fine lines; helps with breakouts.</p><dl><dt>Use</dt><dd>PM only, start 2 nights/week</dd><dt>Pairs</dt><dd>Moisturiser, niacinamide</dd><dt>Note</dt><dd>Daily SPF; avoid in pregnancy — ask your doctor</dd></dl></article>
+      <article class="card tilt" data-tilt="4" data-c="dull age sun"><span class="tag">Brightens</span><h3>Vitamin C</h3><p>An antioxidant that brightens and boosts sun protection.</p><dl><dt>Use</dt><dd>AM, under SPF</dd><dt>Pairs</dt><dd>Vitamin E, SPF</dd><dt>Note</dt><dd>Can sting; store away from light</dd></dl></article>
+      <article class="card tilt" data-tilt="4" data-c="dry"><span class="tag">Hydrates</span><h3>Hyaluronic acid</h3><p>Draws water into the skin for a plumper feel.</p><dl><dt>Use</dt><dd>AM and PM on damp skin</dd><dt>Pairs</dt><dd>Everything</dd><dt>Note</dt><dd>Seal with moisturiser</dd></dl></article>
+      <article class="card tilt" data-tilt="4" data-c="acne"><span class="tag">Unclogs</span><h3>Salicylic acid</h3><p>An oil-soluble BHA that clears pores and blackheads.</p><dl><dt>Use</dt><dd>PM, 2–3 times a week</dd><dt>Pairs</dt><dd>Moisturiser</dd><dt>Note</dt><dd>Don’t stack with strong retinol</dd></dl></article>
+      <article class="card tilt" data-tilt="4" data-c="dull age"><span class="tag">Exfoliates</span><h3>AHAs (glycolic, lactic)</h3><p>Dissolve dead skin for a smoother, brighter surface.</p><dl><dt>Use</dt><dd>PM, 1–2 times a week</dd><dt>Pairs</dt><dd>Hydrators</dd><dt>Note</dt><dd>Makes skin sun-sensitive</dd></dl></article>
+      <article class="card tilt" data-tilt="4" data-c="dry"><span class="tag">Repairs</span><h3>Ceramides</h3><p>Fats that make up the skin barrier; great for dry or sensitive skin.</p><dl><dt>Use</dt><dd>AM and PM</dd><dt>Pairs</dt><dd>Everything</dd><dt>Note</dt><dd>Look in moisturisers</dd></dl></article>
+      <article class="card tilt" data-tilt="4" data-c="acne dull"><span class="tag">Calms</span><h3>Azelaic acid</h3><p>Helps redness, breakouts and uneven tone; gentle on most skin.</p><dl><dt>Use</dt><dd>AM or PM</dd><dt>Pairs</dt><dd>Niacinamide</dd><dt>Note</dt><dd>Mild tingling at first is normal</dd></dl></article>
+      <article class="card tilt" data-tilt="4" data-c="sun age"><span class="tag">Protects</span><h3>Sunscreen</h3><p>The most proven anti-ageing and skin-cancer-prevention product.</p><dl><dt>Use</dt><dd>Every morning, SPF 30+</dd><dt>Amount</dt><dd>Two finger-lengths, face and neck</dd><dt>Note</dt><dd>Reapply every ~2 hours in sun</dd></dl></article>
+    </div>
+  </div>
+</section>
+
+<section id="hair" style="background:var(--surface2);border-radius:40px;margin-inline:12px">
+  <div class="wrap two">
+    <div class="rv"><span class="eyebrow">Hair care</span><h2 style="margin:18px 0 22px">Healthy hair <em>starts at the scalp.</em></h2><p class="lead">A few small rules cover most hair types — for any length, any gender.</p></div>
+    <div class="rv" style="--d:.08s">
+      <details open><summary>Oily scalp, limp hair</summary><p>Wash more often with a clarifying or gentle shampoo, focus on the roots, and put conditioner on the lengths only. Don’t over-brush.</p></details>
+      <details><summary>Dry, frizzy hair</summary><p>Wash less often with a sulfate-free shampoo, use a rich conditioner and a leave-in, and let hair air-dry when you can. Lower the heat on styling tools and use a protectant.</p></details>
+      <details><summary>Curly and coily hair</summary><p>Moisture is the priority. Detangle with conditioner in, finger-comb or use a wide-tooth comb, and sleep on silk or satin or in a loose bonnet.</p></details>
+      <details><summary>Shedding or thinning</summary><p>Some daily shedding is normal. If you notice sudden or patchy loss, or a widening part, speak to a doctor or dermatologist — causes include stress, iron, thyroid, and genetics, and early advice helps.</p></details>
+      <details><summary>Dandruff and itch</summary><p>Try a shampoo with zinc pyrithione, ketoconazole or selenium sulfide, leaving it on for a few minutes. If it persists, see a professional.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="makeup">
+  <div class="wrap two">
+    <div class="mk tilt rv" data-tilt="3">
+      <span class="eyebrow">Makeup basics</span>
+      <h2>Less, <em>placed well.</em></h2>
+      <ol>
+        <li><div><b>Prep</b><span>Moisturiser, then SPF. Wait a couple of minutes.</span></div></li>
+        <li><div><b>Even it out</b><span>Skin tint or concealer only where needed. Blend with fingers or a damp sponge.</span></div></li>
+        <li><div><b>Add life</b><span>A touch of cream blush or lip tint in a shade close to your natural flush.</span></div></li>
+        <li><div><b>Define</b><span>Brush brows up, curl lashes, one coat of mascara. Done.</span></div></li>
+        <li><div><b>Remove</b><span>Always cleanse before bed, even when tired.</span></div></li>
+      </ol>
+    </div>
+    <div class="rv" style="--d:.1s;display:grid;gap:18px">
+      <div class="card"><span class="num">FIND YOUR UNDERTONE</span><h3>Check your veins</h3><p>Greenish veins usually suggest a warm undertone, bluish a cool one, and a mix means neutral. Gold jewellery flatters warm; silver, cool.</p></div>
+      <div class="card"><span class="num">TOOLS</span><h3>Clean brushes weekly</h3><p>Dirty brushes and sponges trap oil and bacteria, which can cause breakouts. Wash with mild soap and air-dry.</p></div>
+      <div class="card"><span class="num">FOR EVERYONE</span><h3>Concealer is not just for women</h3><p>Anyone can use a little concealer or tinted balm for tired eyes or blemishes. It’s grooming, not a statement.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="myths" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">Myth or fact</span><h2>Tap to <em>find out.</em></h2></div>
+    <div class="grid g4">
+      <div class="flip rv"><div class="flip-in"><div class="flip-f"><small>Myth?</small><h3>“Oily skin doesn’t need moisturiser.”</h3><small>Tap to flip</small></div><div class="flip-b"><small>Myth</small><p>Skin that lacks water can still make oil. A light gel moisturiser helps balance it.</p></div></div></div>
+      <div class="flip rv" style="--d:.06s"><div class="flip-in"><div class="flip-f"><small>Myth?</small><h3>“Higher SPF means you can stay out all day.”</h3><small>Tap to flip</small></div><div class="flip-b"><small>Myth</small><p>Any SPF wears off. Reapply about every two hours and after swimming or sweating.</p></div></div></div>
+      <div class="flip rv" style="--d:.12s"><div class="flip-in"><div class="flip-f"><small>Myth?</small><h3>“Pores can open and close.”</h3><small>Tap to flip</small></div><div class="flip-b"><small>Myth</small><p>Pores aren’t muscles. Warm water loosens oil but they don’t open or close; cleansing keeps them clear.</p></div></div></div>
+      <div class="flip rv" style="--d:.18s"><div class="flip-in"><div class="flip-f"><small>Fact?</small><h3>“You need sunscreen on cloudy days.”</h3><small>Tap to flip</small></div><div class="flip-b"><small>Fact</small><p>Much of UV passes through cloud and even windows. Daily SPF is the habit that counts.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap"><div class="news rv"><div><span class="eyebrow" style="color:inherit;opacity:.8">Next</span><h2 style="margin-top:14px">Now move <em>your body.</em></h2></div><div><a class="btn" style="background:var(--on-accent);color:var(--accent)" href="fitness.html">Go to Fitness <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div></div>
+</section>
+</main>
+
+<footer id="site-footer"></footer>
+<script src="js/main.js"></script>
+<script>
+(() => {
+  const { $, $$ } = SOMA, btns = $$('#ifilter .chip'), items = $$('.ing article');
+  btns.forEach(b => b.onclick = () => {
+    btns.forEach(x => x.classList.toggle('on', x === b));
+    items.forEach(a => a.classList.toggle('off', b.dataset.f !== 'all' && !a.dataset.c.split(' ').includes(b.dataset.f)));
+  });
+})();
+</script>
+</body>
+</html>

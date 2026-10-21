@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Journal — Soma</title>
+<meta name="description" content="Short, useful articles on skincare, fitness, health and grooming — plus FAQ and contact.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Hanken+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<script>try{var t=JSON.parse(localStorage.getItem('soma-theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}</script>
+<style>
+.jh{padding-top:30px;padding-bottom:clamp(40px,6vw,70px)}
+.mast{display:flex;justify-content:space-between;align-items:center;border-block:1px solid var(--ink);padding:10px 4px;font-family:var(--ff-m);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;gap:14px;flex-wrap:wrap;margin-bottom:34px}
+.jh h1{font-size:clamp(4rem,16vw,13rem);letter-spacing:-.06em;line-height:.8;margin-bottom:30px}
+.jh h1 em{font-weight:200}
+.jh .row{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-end}
+.cats{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px}
+.arts{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:960px){.arts{grid-template-columns:1fr 1fr}}@media(max-width:620px){.arts{grid-template-columns:1fr}}
+.art{display:flex;flex-direction:column;border-radius:26px;overflow:hidden;background:var(--surface);border:1px solid var(--line);text-align:left;transition:box-shadow .4s,border-color .4s;height:100%}
+.art:hover{border-color:var(--ink);box-shadow:var(--shadow)}
+.art .top{height:190px;background:var(--c);color:#fff;padding:22px;display:flex;justify-content:space-between;align-items:flex-end;position:relative;overflow:hidden}
+.art .top::before{content:attr(data-n);position:absolute;right:14px;top:-14px;font-family:var(--ff-d);font-weight:200;font-size:9rem;letter-spacing:-.08em;line-height:1;opacity:.22;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.art:hover .top::before{transform:translate(-8px,10px) scale(1.08)}
+.art .top span{font-family:var(--ff-m);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;border:1px solid rgba(255,255,255,.5);padding:.35em .85em;border-radius:99px;position:relative}
+.art .bd{padding:24px 24px 26px;display:grid;gap:10px;flex:1;align-content:start}
+.art h3{font-size:1.55rem}.art p{color:var(--muted);font-size:.95rem}
+.art small{font-family:var(--ff-m);font-size:.7rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-top:6px}
+.art.off{display:none}
+.lead-art{grid-column:1/-1;flex-direction:row;min-height:380px}
+.lead-art .top{height:auto;flex:1.1;padding:34px}
+.lead-art .top::before{font-size:18rem;top:-40px}
+.lead-art .bd{flex:1;padding:clamp(26px,4vw,50px);align-content:center}
+.lead-art h3{font-size:clamp(2rem,4vw,3.2rem)}
+@media(max-width:760px){.lead-art{flex-direction:column}.lead-art .top{min-height:200px}}
+.rd h2{font-size:clamp(2rem,5vw,3.4rem);margin:14px 0 10px}.rd .meta{font-family:var(--ff-m);font-size:.74rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.rd p{color:var(--muted);margin-top:16px;font-size:1.04rem;line-height:1.7}
+.rd ul{margin-top:22px;padding:22px 24px;background:var(--accent-soft);border-radius:18px}
+.rd ul.tick li{color:var(--ink)}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,80px)}
+@media(max-width:900px){.about{grid-template-columns:1fr}}
+.cform{display:grid;gap:18px}
+.cform .two2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:560px){.cform .two2{grid-template-columns:1fr}}
+.cform textarea{min-height:150px;resize:vertical}
+.okmsg{display:none;padding:24px;border-radius:18px;background:var(--accent-soft);border:1px solid var(--accent)}
+.hon{font-size:.8rem;color:var(--muted)}
+.info{display:grid;gap:0}
+.info div{padding:22px 0;border-top:1px solid var(--line)}.info div:last-child{border-bottom:1px solid var(--line)}
+.info small{font-family:var(--ff-m);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:6px}
+.info b{font-family:var(--ff-d);font-weight:350;font-size:1.5rem;letter-spacing:-.02em}
+</style>
+</head>
+<body class="p-journal" data-page="journal">
+<div id="site-header"></div>
+
+<header class="wrap jh">
+  <div class="mast rv"><span>Vol. 01</span><span>Skin · Body · Mind · Style</span><span>Free to read</span></div>
+  <h1 class="rv" style="--d:.05s">The <em>Journal</em></h1>
+  <div class="row rv" style="--d:.12s"><p class="lead">Short, useful notes on looking after yourself — read in minutes, remembered for months.</p><a class="btn btn-p" href="#contact">Ask us anything</a></div>
+</header>
+
+<section style="padding-top:20px" id="articles">
+  <div class="wrap">
+    <div class="cats rv" id="cats"><button class="chip on" data-c="all">All</button><button class="chip" data-c="skin">Skin</button><button class="chip" data-c="fit">Fitness</button><button class="chip" data-c="health">Health</button><button class="chip" data-c="groom">Grooming</button></div>
+    <div class="arts" id="arts"></div>
+  </div>
+</section>
+
+<section style="background:var(--surface2);border-radius:40px;margin-inline:12px" id="about">
+  <div class="wrap about">
+    <div class="rv"><span class="eyebrow">About Soma</span><h2 style="margin:18px 0 22px">Wellness, <em>edited.</em></h2><p class="lead">Soma (Greek for “body”) is a small journal with a simple belief: caring for yourself should be calm, clear and free of hype.</p></div>
+    <div class="rv" style="--d:.08s"><p style="color:var(--muted);margin-bottom:18px">We write for everyone — men, women and anyone in between — and for every budget. Our advice leans on widely accepted guidance from dermatology, sports science and public-health bodies, in plain language, with no miracle claims.</p><p style="color:var(--muted)">Soma shares general information and is not a substitute for professional medical advice, diagnosis or treatment. When something worries you, see a qualified professional.</p></div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap about">
+    <div class="rv"><span class="eyebrow">Questions</span><h2 style="margin:18px 0 22px">Good <em>to know.</em></h2></div>
+    <div class="rv" style="--d:.08s">
+      <details open><summary>Is Soma only for women?</summary><p>No. Every chapter is for everyone, and the Grooming page lets you switch between men’s, women’s and shared advice.</p></details>
+      <details><summary>Where is my data saved?</summary><p>Quiz results, habits and checklists are saved only in your own browser. Nothing is uploaded.</p></details>
+      <details><summary>Can I trust the calculators?</summary><p>They’re estimates based on standard formulas. They’re starting points for conversation, not diagnoses.</p></details>
+      <details><summary>Are products recommended?</summary><p>We focus on ingredients and habits rather than brands, so the advice works at any price.</p></details>
+      <details><summary>I have a skin or health condition. What should I do?</summary><p>See a doctor or dermatologist before changing treatment. Use Soma for general lifestyle ideas only.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="padding-top:0">
+  <div class="wrap about">
+    <div class="rv"><span class="eyebrow">Contact</span><h2 style="margin:18px 0 22px">Say <em>hello.</em></h2><div class="info"><div><small>Topics</small><b>Questions, ideas, corrections</b></div><div><small>Reply time</small><b>Within a few days</b></div><div><small>Note</small><b style="font-size:1.1rem;font-family:var(--ff-b);font-weight:500;letter-spacing:0">Please don’t send private medical details.</b></div></div></div>
+    <div class="rv" style="--d:.08s">
+      <form class="cform" id="cf">
+        <div class="two2"><div><label for="cn">Name</label><input type="text" id="cn" required autocomplete="name"></div><div><label for="ce">Email</label><input type="email" id="ce" required autocomplete="email"></div></div>
+        <div><label for="ct">Topic</label><select id="ct"><option>A question</option><option>Suggest an article</option><option>Report a mistake</option><option>Something else</option></select></div>
+        <div><label for="cm">Message</label><textarea id="cm" required></textarea></div>
+        <button class="btn btn-p" type="submit" style="width:max-content">Send message</button>
+        <p class="hon">Demo form: this site has no server yet, so messages aren’t delivered until a form service is connected.</p>
+      </form>
+      <div class="okmsg" id="ok"><h3 style="margin-bottom:8px">Thank you ✺</h3><p style="color:var(--muted)">Your message looks great. (Demo mode: nothing was sent.)</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Article"><div class="modal-box rd" id="mbox"></div></div>
+
+<footer id="site-footer"></footer>
+<script src="js/main.js"></script>
+<script>
+(() => {
+  const { $, $$ } = SOMA;
+  const C = { skin: ['#B5532F', 'Skin'], fit: ['#D63A1B', 'Fitness'], health: ['#0F6B68', 'Health'], groom: ['#8A6420', 'Grooming'] };
+  const A = [
+    { c: 'skin', t: 'The five-minute routine', m: 5, x: 'Cleanser, moisturiser, sunscreen. Why the shortest routine is often the one that works.',
+      b: ['Most skin problems aren’t caused by too few products but by inconsistency, over-exfoliation, or skipping sun protection. A short routine you actually follow wins.', 'Morning: rinse or cleanse, moisturise, apply SPF 30+. Evening: cleanse (twice if you wore sunscreen or makeup) and moisturise. That is the whole routine.', 'Add one extra product only when you have a specific goal, and wait a few weeks before adding another so you know what is helping.'], k: ['Cleanse gently, never until “squeaky”', 'Moisturise even oily skin', 'SPF 30+ every morning', 'Add one new product at a time'] },
+    { c: 'health', t: 'How to fall asleep faster', m: 4, x: 'A calmer evening, a cooler room and a steadier clock all help your body switch off.',
+      b: ['Your body runs on a 24-hour clock. A regular wake-up time, even on weekends, is the strongest signal you can give it.', 'In the last hour before bed, dim the lights, put screens away and do something quiet — reading, stretching, a warm shower. A cool, dark, quiet room helps.', 'If you can’t sleep after about 20 minutes, get up, do something calm in low light, and return when sleepy. If sleep trouble lasts for weeks, talk to a doctor.'], k: ['Fixed wake-up time', 'Wind-down hour', 'Cool, dark, quiet room', 'Limit late caffeine and heavy meals'] },
+    { c: 'fit', t: 'The beginner’s home workout', m: 5, x: 'Six moves, twenty minutes, no equipment. Start here and build slowly.',
+      b: ['You don’t need a gym to get stronger. Bodyweight squats, incline push-ups, glute bridges, bird dogs, planks and marching cover the whole body.', 'Do each move for 40 seconds with 20 seconds of rest, and go around once or twice. Focus on slow, controlled form rather than speed.', 'Train three times a week to start. Add a few seconds or a round every week or two, and keep two real rest days.'], k: ['40 seconds on, 20 off', 'Form before speed', '3 sessions a week', 'Progress a little each week'] },
+    { c: 'groom', t: 'Shave without the irritation', m: 3, x: 'Warm water, a sharp blade, light pressure and a cool rinse make most of the difference.',
+      b: ['Razor bumps and burn usually come from dry skin, a dull blade or too much pressure. Fixing those three solves most problems.', 'Shave after a warm shower, use a proper cream or gel, and go with the grain on the first pass. Rinse cool and apply an alcohol-free moisturiser.', 'Change blades every five to seven shaves. If you get ingrown hairs often, try shaving less often or with a single blade, and ask a dermatologist if it persists.'], k: ['Warm water first', 'Real shaving cream', 'Light pressure, with the grain', 'Fresh blade, cool rinse'] },
+    { c: 'skin', t: 'Retinol: a gentle introduction', m: 5, x: 'The most-studied anti-ageing ingredient, and how to start without the redness.',
+      b: ['Retinol is a vitamin A derivative that speeds skin renewal. Over months it can smooth texture, fade marks and help breakouts.', 'Start with a low strength, a pea-sized amount for the whole face, two nights a week on dry skin, followed by moisturiser. Increase slowly if your skin is calm.', 'Use sunscreen daily; retinoids can increase sun sensitivity. Skip it if you are pregnant or planning to be, and ask your doctor if unsure.'], k: ['Low strength, 2 nights a week', 'Pea-sized amount', 'Always moisturise and use SPF', 'Ask a doctor if pregnant'] },
+    { c: 'health', t: 'A week of better lunches', m: 4, x: 'Use the plate method and a little planning to make midday meals easy and good.',
+      b: ['Fill half your plate with vegetables or fruit, a quarter with protein, and a quarter with whole grains, plus a little healthy fat.', 'Cook a batch of grains and a protein on the weekend, wash and chop vegetables, and mix and match through the week.', 'Keep water nearby, and don’t aim for perfect — one balanced meal a day is a real improvement.'], k: ['Half veg, quarter protein, quarter grains', 'Batch-cook basics', 'Mix and match', 'Progress, not perfection'] },
+    { c: 'fit', t: 'Why you should walk more', m: 3, x: 'It’s free, gentle, and one of the best things you can do for heart, mind and mood.',
+      b: ['A brisk 30-minute walk counts toward the weekly 150 minutes of moderate activity that health bodies recommend for adults.', 'Walking after meals can help digestion, and daylight in the morning helps your sleep rhythm.', 'Make it easy: walk during phone calls, take the long way, or park further away. Steps add up.'], k: ['30 brisk minutes counts', 'Walk after meals', 'Get morning daylight', 'Make it part of your day'] },
+    { c: 'groom', t: 'How to talk to your barber or stylist', m: 3, x: 'Bring a photo, describe lengths, and say how much time you’ll spend styling.',
+      b: ['Good haircuts start with clear communication. Bring two or three photos from different angles, and say what you like about them.', 'Use lengths and places rather than words like “a little off”, and mention how much time you want to spend styling each morning.', 'Ask what suits your hair texture and growth patterns; a good professional will tell you honestly what will and won’t work.'], k: ['Bring photos', 'Describe lengths', 'Mention daily styling time', 'Ask for honest advice'] },
+    { c: 'health', t: 'A five-minute stress reset', m: 3, x: 'Breathe, stretch, step outside: three tiny actions that change how a day feels.',
+      b: ['When stress builds, slow your breathing: inhale for four, hold for four, exhale for four, hold for four, for about two minutes.', 'Then roll your shoulders, stretch your neck, and step outside for fresh air and daylight, even for a moment.', 'If you feel anxious or low most days for weeks, please speak to a doctor or counsellor. Asking for help is a strength.'], k: ['Box breathing for 2 minutes', 'Stretch shoulders and neck', 'Daylight and fresh air', 'Ask for help if it lasts'] }
+  ];
+  const wrap = $('#arts');
+  wrap.innerHTML = A.map((a, i) => `<button class="art tilt ${i === 0 ? 'lead-art' : ''} rv" data-i="${i}" data-c="${a.c}" data-tilt="3" style="--d:${(i % 3) * .06}s"><div class="top" data-n="0${i + 1}" style="--c:${C[a.c][0]}"><span>${C[a.c][1]}</span></div><div class="bd"><h3>${a.t}</h3><p>${a.x}</p><small>${a.m} min read</small></div></button>`).join('');
+  $$('.rv', wrap).forEach(el => { const o = new IntersectionObserver(e => { if (e[0].isIntersecting) { el.classList.add('in'); o.disconnect(); } }, { threshold: .1 }); o.observe(el); });
+  $$('.tilt', wrap).forEach(el => { if (!matchMedia('(hover:hover)').matches) return; el.addEventListener('pointermove', e => { const r = el.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height; el.classList.add('hot'); el.style.transform = `perspective(1000px) rotateX(${(.5 - y) * 3}deg) rotateY(${(x - .5) * 3}deg)`; }); el.addEventListener('pointerleave', () => { el.classList.remove('hot'); el.style.transform = ''; }); });
+
+  /* filter */
+  $$('#cats .chip').forEach(b => b.onclick = () => { $$('#cats .chip').forEach(x => x.classList.toggle('on', x === b)); let first = true; $$('.art', wrap).forEach(a => { const show = b.dataset.c === 'all' || a.dataset.c === b.dataset.c; a.classList.toggle('off', !show); a.classList.toggle('lead-art', show && first); if (show) first = false; }); });
+
+  /* reader */
+  const modal = $('#modal'), mbox = $('#mbox');
+  const close = () => { modal.classList.remove('open'); document.body.style.overflow = ''; };
+  wrap.addEventListener('click', e => {
+    const el = e.target.closest('.art'); if (!el) return; const a = A[+el.dataset.i];
+    mbox.innerHTML = `<button class="ico modal-x" aria-label="Close" id="mx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button><span class="tag" style="background:${C[a.c][0]};color:#fff;border-color:transparent">${C[a.c][1]}</span><h2>${a.t}</h2><div class="meta">${a.m} min read</div>${a.b.map(p => `<p>${p}</p>`).join('')}<ul class="tick">${a.k.map(k => `<li><b>${k}</b></li>`).join('')}</ul><p style="font-size:.85rem">General information only, not medical advice.</p>`;
+    modal.classList.add('open'); document.body.style.overflow = 'hidden'; $('#mx').onclick = close; $('#mx').focus();
+  });
+  modal.addEventListener('click', e => { if (e.target === modal) close(); });
+  addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+
+  /* contact */
+  $('#cf').onsubmit = e => { e.preventDefault(); $('#cf').style.display = 'none'; $('#ok').style.display = 'block'; };
+})();
+</script>
+</body>
+</html>
